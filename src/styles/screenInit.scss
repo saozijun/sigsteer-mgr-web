@@ -1,0 +1,164 @@
+@use "sass:math";
+
+// 视口单位转换函数
+@function vw($px) {
+  @return math.div($px, 1920) * 100vw;
+}
+
+@function vh($px) {
+  @return math.div($px, 1080) * 100vh;
+}
+
+// 常用混合器
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin flex-between {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@mixin absolute-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+@font-face {
+  font-family: "优设标题黑";
+  src: url("@/assets/fonts/f-text.ttf") format("truetype");
+}
+// 基础样式重置
+.main-bay {
+  * {
+    box-sizing: border-box;
+    line-height: 1;
+  }
+
+  .dialog-footer {
+    display: flex;
+    justify-content: center;
+    gap: vw(15);
+  }
+  ul,
+  li {
+    list-style: none;
+  }
+
+  // 滚动条样式
+  ::-webkit-scrollbar {
+    width: vw(6);
+    height: vw(6);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: vw(3);
+  }
+
+  ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.1);
+  }
+}
+.btn-group {
+  display: flex;
+  align-items: center;
+  gap: vw(15);
+}
+:deep(.tooltip-box) {
+  padding: 0 !important;
+  box-shadow: none !important;
+}
+:deep(.tooltip-style) {
+  width: fit-content;
+  padding: vw(16) vw(18);
+  font-size: vw(16);
+  color: #fff;
+  background: #000000b8;
+  border: vw(1) solid #ffffff47;
+  border-radius: vw(10);
+  backdrop-filter: blur(vw(10));
+
+  div {
+    width: 100%;
+    margin-bottom: vw(5);
+  }
+
+  p {
+    font-size: vw(14);
+    line-height: 1.5;
+  }
+}
+
+// 后台页面基础样式
+.backend-main {
+  padding-top: vw(10);
+
+  .title {
+    font-size: vw(22);
+    font-family: "优设标题黑";
+    margin-bottom: vh(20);
+    position: relative;
+    width: fit-content;
+    padding-left: vw(10);
+    &::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: vw(20);
+      background: linear-gradient(
+        to left,
+        transparent,
+        rgba(49, 163, 240, 0.192)
+      );
+      left: 0%;
+      bottom: -10%;
+    }
+  }
+
+  .table-form {
+    margin-bottom: vh(20);
+    display: flex;
+    gap: vw(15);
+    .el-input {
+      width: 12vw;
+    }
+    .el-select {
+      width: 12vw;
+    }
+    .el-range-editor.el-input__wrapper {
+      width: 14vw;
+      border: vw(1) solid rgba(255, 255, 255, 0.425);
+    }
+    .el-form-item {
+      margin-bottom: 0 !important;
+    }
+  }
+
+  .table-box {
+    height: calc(100vh - 26vh);
+    background-color: #0000001c;
+    backdrop-filter: blur(vw(5));
+    display: flex;
+    flex-direction: column;
+    padding-bottom: vw(20);
+
+    .pagination {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding-right: vw(20);
+    }
+  }
+
+  .form-box {
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    flex-wrap: wrap;
+  }
+}
