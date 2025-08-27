@@ -8,7 +8,7 @@
                         @keyup.enter="getList"></el-input>
                 </el-form-item>
                 <el-form-item label="创建时间：">
-                    <el-date-picker v-model="createTime" type="daterange" range-separator="至" start-placeholder="开始日期"
+                    <el-date-picker v-model="createTime" type="daterange" range-separator="-" start-placeholder="开始日期"
                         end-placeholder="结束日期" value-format="YYYY-MM-DD">
                     </el-date-picker>
                 </el-form-item>
@@ -29,9 +29,10 @@
                 <el-table-column :show-overflow-tooltip="true" prop="createTime" label="创建日期" width="160" />
                 <el-table-column label="操作" width="200" align="center">
                     <template #default="scope">
-                        <div class="edit-group" v-if="scope.row.name !== '超级管理员'">
-                            <div class="edit-btn" @click="openForm(scope.row)">编辑</div>
-                            <div class="edit-btn" @click="delCar(scope.row.id)">删除</div>
+                        <div class="edit-group" >
+                            <div class="edit-btn" @click="openForm(scope.row)" v-if="scope.row.name !== '超级管理员'">编辑</div>
+                            <div class="edit-btn" @click="delCar(scope.row.id)" v-if="scope.row.name !== '超级管理员'">删除</div>
+                            <div class="edit-btn" @click="openMenuForm(scope.row)">权限</div>
                         </div>
                     </template>
                 </el-table-column>
@@ -43,25 +44,21 @@
         </div>
     </div>
     <Form ref="formRef" @success="getList" />
+    <MenuForm ref="menuFormRef" @success="getList" />
 </template>
 
 <script setup>
 import Form from './components/Form.vue'
-import { ref, onMounted, nextTick } from 'vue'
-import { page, del, getRole, saveMenu } from '@/api/system/role'
-import { treeList } from '@/api/system/menu'
+import MenuForm from './components/MenuForm.vue'
+import { ref, onMounted } from 'vue'
+import { page, del } from '@/api/system/role'
 import { ElMessageBox, ElMessage } from 'element-plus'
 const formRef = ref(null) // 表单组件实例
+const menuFormRef = ref(null)
 const tableData = ref([]) // 表格数据
 const total = ref(0)
 const multipleSelection = ref([]) // 多选数据
 const createTime = ref(undefined) // 创建时间筛选
-const menuTreeRef = ref(null) // 菜单树引用
-const menuTree = ref([]) // 菜单树数据
-const menuIds = ref([]) // 默认选中的菜单ID
-const currentId = ref(undefined) // 当前选中的角色ID
-const showButton = ref(false) // 是否显示保存按钮
-const defaultProps = ref({ children: 'children', label: 'label' }) // 树形控件属性
 const selectable = (row) => !["超级管理员"].includes(row.name)
 
 // 查询参数
@@ -97,6 +94,9 @@ const getList = async () => {
 // 打开新增/编辑弹窗
 const openForm = (row = null) => {
     formRef.value.open(row)
+}
+const openMenuForm = (row) => {
+    menuFormRef.value.open(row)
 }
 
 // 多选回调

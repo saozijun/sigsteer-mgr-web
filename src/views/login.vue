@@ -33,7 +33,7 @@ const userStore = useUserStore()
 const ruleFormRef = ref()
 const rules = ref({
     username: [{ required: true, message: '请输入账号', trigger: 'blur' }],
-    password: [{ required: true, message: '请输入账号', trigger: 'blur' }],
+    password: [{ required: true, message: '请输入密码', trigger: 'blur' }],
 })
 const router = useRouter()
 const loading = ref(false)
@@ -50,13 +50,12 @@ const submitForm = async (formEl) => {
         loading.value = true
         let res = await login(formData.value)
         loading.value = false
-        console.log(res);
         
         if (res.code === 200) {
             await userStore.login(res.data)
             ElMessage.success('登录成功')
             router.push('/')
-        }
+        } 
     } catch (error) {
         loading.value = false
     }

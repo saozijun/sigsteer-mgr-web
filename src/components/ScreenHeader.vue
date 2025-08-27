@@ -111,7 +111,7 @@ a {
       gap: 1vw;
 
       .date {
-        min-width: vw(240);
+        min-width: vw(250);
       }
 
       img {

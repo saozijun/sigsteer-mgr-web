@@ -58,11 +58,11 @@ export function lazy(pid) {
   })
 }
 
-export function getMenuSuperior(ids) {
-  const params = Array.isArray(ids) || ids.length === 0 ? ids.toString() : Array.of(ids).toString()
+// 保存角色菜单
+export function saveMenu(roleId,allMenuIds) {
   return request({
-    url: '/v1/menu/superior',
-    method: 'get',
-    params: { ids: params }
+    url: `/v1/role/${roleId}/saveMenu`,
+    method: 'post',
+    data: allMenuIds
   })
 }

@@ -348,6 +348,10 @@
     padding-left: vw(8);
   }
 }
+.el-input.is-disabled .el-input__wrapper {
+  box-shadow: 0 0 0 vw(1) #ffffff2f inset;
+  background-color: #f5f7fa31 !important;
+}
 .el-checkbox__input.is-disabled .el-checkbox__inner {
   background-color: #f5f7fa8a;
 }
@@ -430,10 +434,17 @@
 .el-tree {
   background: #00000000;
   color: var(--el-tree-text-color);
+  border: vw(1) solid #ffffff36 !important;
 }
 .el-tree-node__content:hover {
   background-color: #1592f81c;
 }
 .el-tree-node:focus > .el-tree-node__content {
   background-color: #0c76cc1c;
+}
+.el-tree .el-tree-node__content:hover {
+  background-color: #ffffff1c !important;
+}
+.el-tree--highlight-current .el-tree-node.is-current > .el-tree-node__content {
+  background-color: #ffffff1c !important;
 }

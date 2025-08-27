@@ -562,7 +562,6 @@ const openCar = (item) => {
             @include flex-center;
             text-shadow: vw(0) vw(0) vw(10) rgba(255, 255, 255, 0.829);
             padding-top: vw(16);
-
             &.type-danger {
               background: url('@/assets/screen/wy2-icon.svg') no-repeat center;
               background-position: vw(0) vw(-5);

@@ -9,12 +9,15 @@ import 'virtual:svg-icons-register'
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import elementIcons from '@/components/SvgIcon/svgicon'
 
+// 路由权限控制
+import './permission' 
+
 import App from './App.vue'
 import router from './router'
 import ElementPlus from 'element-plus'
 import 'element-plus/dist/index.css'
-
 import Btn from '@/components/Btn.vue'
+
 const app = createApp(App)
 app.component('Btn', Btn)
 app.use(pinia)

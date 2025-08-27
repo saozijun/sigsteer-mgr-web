@@ -1,5 +1,5 @@
 <template>
-    <div class="car-main">
+    <div class="backend-main">
         <h3 class="title">信令分析</h3>
         <div class="table-form">
             <el-form ref="form" :model="queryParams" style="display: flex;align-items: center;gap: 1vw;flex-wrap: wrap;"
@@ -18,12 +18,12 @@
                 </el-form-item>
                 <el-form-item label="起止时间:">
                     <el-date-picker v-model="dateArr" value-format="YYYY-MM-DD" class="select-bay"
-                        style="width: 10.3vw;" popper-class="screen_popper" type="daterange" range-separator="-"
+                        style="width: 12vw;" popper-class="screen_popper" type="daterange" range-separator="-"
                         start-placeholder="开始日期" end-placeholder="结束日期">
                     </el-date-picker>
                 </el-form-item>
                 <el-form-item label="接收间隔：">
-                    <el-input v-model="queryParams.dstPort" style="width: 10.3vw;">
+                    <el-input v-model="queryParams.dstPort" style="width: 12vw;">
                         <template #prepend>大于</template>
                         <template #append>秒</template>
                     </el-input>
@@ -99,44 +99,9 @@ const getList = async () => {
 </script>
 
 <style lang="scss" scoped>
-.car-main {
-    padding-top: vw(10);
-
-    .title {
-        font-size: vw(22);
-        font-family: "优设标题黑";
-        margin-bottom: vh(20);
-
-    }
-
-    .table-form {
-        margin-bottom: vh(20);
-        display: flex;
-        flex-wrap: wrap;
-        gap: vw(15);
-    }
+.backend-main .table-box {
+    height: calc(100vh - 32vh);
 }
-
-.table-box {
-    height: calc(100vh - 33vh);
-    background-color: #0000001c;
-    backdrop-filter: blur(vw(5));
-    display: flex;
-    flex-direction: column;
-    padding-bottom: vw(20);
-
-    .pagination {
-        display: flex;
-        align-items: center;
-        justify-content: flex-end;
-        padding-right: vw(20);
-    }
-}
-
-:deep(.el-form-item) {
-    margin-bottom: 0;
-}
-
 .btn-group {
     margin-left: vw(20);
 }

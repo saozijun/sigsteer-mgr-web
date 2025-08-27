@@ -21,3 +21,11 @@ export function getAuthInfo() {
     method: 'get'
   })
 }
+
+// 获取用户菜单权限
+export function getUserMenus() {
+  return request({
+    url: '/v1/menu/treeList',
+    method: 'get'
+  })
+}
