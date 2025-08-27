@@ -56,15 +56,14 @@ defineExpose({
 <style lang='scss' scoped>
 .icon-body {
   width: 100%;
-  padding: 10px;
 
   .icon-search {
     position: relative;
-    margin-bottom: 5px;
+    margin-bottom: vw(10);
   }
 
   .icon-list {
-    height: 200px;
+    height: vw(260);
     overflow: auto;
 
     .list-container {
@@ -73,8 +72,8 @@ defineExpose({
 
       .icon-item-wrapper {
         width: calc(100% / 3);
-        height: 25px;
-        line-height: 25px;
+        height: vw(30);
+        line-height: vw(30);
         cursor: pointer;
         display: flex;
 
@@ -82,11 +81,10 @@ defineExpose({
           display: flex;
           max-width: 100%;
           height: 100%;
-          padding: 0 5px;
-
+          padding: 0 vw(5);
           &:hover {
             background: #ffffff31;
-            border-radius: 5px;
+            border-radius: vw(5);
           }
 
           .icon {
@@ -97,7 +95,7 @@ defineExpose({
             display: inline-block;
             vertical-align: -0.15em;
             fill: currentColor;
-            padding-left: 2px;
+            padding-left: vw(8);
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -106,7 +104,7 @@ defineExpose({
 
         .icon-item.active {
           background: #ffffff31;
-          border-radius: 5px;
+          border-radius: vw(5);
         }
       }
     }

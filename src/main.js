@@ -5,6 +5,7 @@ import pinia from '@/stores/index'
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 
 // svg图标
+import 'virtual:svg-icons-register'
 import SvgIcon from '@/components/SvgIcon/index.vue'
 import elementIcons from '@/components/SvgIcon/svgicon'
 

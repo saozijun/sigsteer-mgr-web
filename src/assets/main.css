@@ -1,18 +1,19 @@
-@import './base.css';
-*{
+@import "./base.css";
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-.bay-dialog {
-  background: #000000b8 !important;
-  border: 0.1vw solid #ffffff47;
+::-webkit-scrollbar {
+  width: .4vw;
+  height: .4vw;
 }
 
-.bay-dialog .el-dialog__header {
-  display: none;
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 10vw;
 }
-/* 全局隐藏滚动条 */
-::-webkit-scrollbar {
-  display: none;
+
+::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
 }

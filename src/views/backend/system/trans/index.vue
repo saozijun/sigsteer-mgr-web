@@ -17,7 +17,7 @@
         </div>
         <div class="table-box">
             <el-table :data="tableData" height="100%" scrollbar-always-on @selection-change="handleSelectionChange">
-                <el-table-column type="selection" :selectable="selectable" width="55" align="center" />
+                <el-table-column type="selection" width="55" align="center" />
                 <el-table-column prop="id" label="主键ID" align="center" />
                 <el-table-column prop="vehicleCode" label="车辆编号" align="center" />
                 <el-table-column prop="frontIp" label="车头IP地址" align="center" />

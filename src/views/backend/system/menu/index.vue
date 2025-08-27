@@ -18,11 +18,11 @@
                 :default-expand-all="isExpandAll"
                 :tree-props="{children: 'children', hasChildren: 'hasChildren'}"
                 @selection-change="handleSelectionChange">
-                <el-table-column type="selection" :selectable="selectable" width="55" align="center" />
+                <el-table-column type="selection" width="55" align="center" />
                 <el-table-column :show-overflow-tooltip="true" label="菜单标题" width="125px" prop="title" />
                 <el-table-column prop="icon" label="图标" align="center" width="60px">
                     <template #default="scope">
-                        <i v-if="scope.row.icon" :class="scope.row.icon"></i>
+                        <svg-icon :icon-class="scope.row.icon" />
                     </template>
                 </el-table-column>
                 <el-table-column prop="sort" align="center" label="排序">
@@ -70,6 +70,7 @@ import Form from './components/Form.vue'
 import { ref, onMounted, nextTick } from 'vue'
 import { treeList, del } from '@/api/system/menu'
 import { ElMessageBox, ElMessage } from 'element-plus'
+import SvgIcon from "@/components/SvgIcon/index.vue"
 const formRef = ref(null)
 const tableData = ref([])
 const multipleSelection = ref([])

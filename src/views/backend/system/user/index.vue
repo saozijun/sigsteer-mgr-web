@@ -30,7 +30,7 @@
         <div class="table-box">
             <el-table :data="tableData" height="100%" scrollbar-always-on @selection-change="handleSelectionChange"
                 @sort-change="sortChange">
-                <el-table-column type="selection" :selectable="selectable" width="55" align="center" />
+                <el-table-column type="selection" width="55" align="center" />
                 <el-table-column prop="username" label="用户名" :show-overflow-tooltip="true" />
                 <el-table-column prop="nickName" label="昵称" :show-overflow-tooltip="true" />
                 <el-table-column prop="gender" label="性别" />

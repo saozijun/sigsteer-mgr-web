@@ -38,16 +38,16 @@ export default defineComponent({
 .sub-el-icon,
 .nav-icon {
   display: inline-block;
-  font-size: 15px;
-  margin-right: 12px;
+  font-size: vw(14);
+  margin-right: vw(14);
   position: relative;
 }
 
 .svg-icon {
-  width: 1em;
-  height: 1em;
+  width: vw(15);
+  height: vw(15);
   position: relative;
   fill: currentColor;
-  vertical-align: -2px;
+  vertical-align: -vw(3);
 }
 </style>
