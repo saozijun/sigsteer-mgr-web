@@ -8,72 +8,45 @@
                 <el-radio-button value="FTP服务配置">FTP服务配置</el-radio-button>
             </el-radio-group>
             <div class="btn-group">
-                <Btn text="查询" />
-                <Btn text="重置" />
-                <Btn text="新增" />
+                <Btn text="查询" @click="getList" />
+                <Btn text="新增" @click="openForm" />
             </div>
         </div>
         <div class="table-box">
-            <el-table :data="tableData" height="100%" scrollbar-always-on>
-                <el-table-column prop="id" label="主键ID" align="center" />
-                <el-table-column prop="vehicleCode" label="车辆编号" align="center" />
-                <el-table-column prop="frontIp" label="车头IP地址" align="center" />
-                <el-table-column prop="rearIp" label="车尾IP地址" align="center" />
-                <el-table-column label="操作" width="180" align="center">
-                    <template #default="scope">
-                        <div class="edit-group">
-                            <div class="edit-btn" @click="openForm(scope.row)">编辑</div>
-                            <div class="edit-btn" @click="delCar(scope.row.id)">删除</div>
-                        </div>
-                    </template>
-                </el-table-column>
-            </el-table>
-            <div class="pagination">
-                <el-pagination v-model:current-page="queryParams.page" background :page-size="queryParams.limit"
-                    layout="total, prev, pager, next" :total="total" @current-change="getList" />
-            </div>
-            <Form ref="formRef" @success="getList" />
+            <IP ref="ipRef" v-if="tabIndex === '业务类型IP配置'" />
+            <Threshold ref="thresholdRef" v-else-if="tabIndex === '业务间隔阈值配置'"></Threshold>
+            <FTP ref="ftpRef" v-else-if="tabIndex === 'FTP服务配置'"></FTP>
         </div>
     </div>
-    
+
 </template>
 
 <script setup>
-import Form from './components/Form.vue'
-import { ref, onMounted } from 'vue'
-import { page, del } from '@/api/system/trans'
-import { ElMessageBox, ElMessage } from 'element-plus'
-const formRef = ref(null)
+import { ref, onMounted, nextTick } from 'vue'
+import IP from './ip/index.vue'
+import Threshold from './threshold/index.vue'
+import FTP from './ftp/index.vue'
 const tabIndex = ref("业务类型IP配置")
-const tableData = ref([])
-const total = ref(0)
-const queryParams = ref({
-    page: 1,
-    limit: 10
-})
+const ipRef = ref(null)
+const thresholdRef = ref(null)
+const ftpRef = ref(null)
+const getList = () => {
+    if (tabIndex.value === "业务类型IP配置") {
+        ipRef.value.getList()
+    } else if (tabIndex.value === "业务间隔阈值配置") {
+        thresholdRef.value.getList()
+    } else if (tabIndex.value === "FTP服务配置") {
+        ftpRef.value.getList()
+    }
+}
 const openForm = (row = null) => {
-    formRef.value.open(row)
-}
-const delCar = (id) => {
-    ElMessageBox.confirm(
-        '是否删除该数据?',
-        '提示',
-        { type: 'warning' }
-    ).then(async () => {
-        await del({ ids: id })
-        ElMessage.success('删除成功')
-        getList()
-    })
-}
-onMounted(() => {
-    // getList()
-})
-const getList = async () => {
-    tableData.value = []
-    const { data } = await page({ ...queryParams.value })
-    // ElMessage.success('查询成功')
-    tableData.value = data.list
-    total.value = data.total
+    if (tabIndex.value === "业务类型IP配置") {
+        ipRef.value.openForm(row)
+    } else if (tabIndex.value === "业务间隔阈值配置") {
+        thresholdRef.value.openForm(row)
+    } else if (tabIndex.value === "FTP服务配置") {
+        ftpRef.value.openForm(row)
+    }
 }
 </script>
 
@@ -85,6 +58,7 @@ const getList = async () => {
 .backend-main .table-box {
     height: calc(100vh - 26vh);
 }
+
 :deep(.el-radio-group) {
     .el-radio-button__inner {
         padding: vw(13) vw(20);

@@ -21,7 +21,7 @@ import ScreenHeader from '@/components/ScreenHeader.vue'
     flex-direction: column;
     // user-select: none;
     // -webkit-user-select: none;
-    background: url("@/assets/screen/bg.png") no-repeat center center;
+    background: url("@/assets/screen/bg.webp") no-repeat center center;
     background-size: cover;
 }
 

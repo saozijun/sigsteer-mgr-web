@@ -3,7 +3,7 @@
         <h3 class="title">文件下载</h3>
         <div class="content-box">
             <div class="menu-list">
-                <el-tree class="file-tree" draggable :data="data" :props="defaultProps">
+                <el-tree class="file-tree" draggable :data="data" :props="defaultProps" default-expand-all>
                     <template #default="{ node, data }">
                         <div class="custom-tree-node">
                             <img src="@/assets/images/document.png" alt="">
@@ -30,7 +30,7 @@
                     </el-table>
                 </div>
                 <div class="file-group">
-                    <Btn text="批量下载"></Btn>
+                    <Btn text="批量下载" :disabled="!multipleSelection.length"></Btn>
                 </div>
             </div>
         </div>
@@ -39,6 +39,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue'
+const multipleSelection = ref([])
 const tableData = ref([{
     size: '2558706',
     name: '2025.08.26 09:00:00.zip',
@@ -64,12 +65,11 @@ const data = [
                 label: '2025',
                 children: [
                     {
-                        label: '8月',
-                        label: '9月',
-                        label: '10月',
-                        label: '11月',
-                        label: '12月',
+                        label: '1月',
                     },
+                    {
+                        label: '2月',
+                    }
                 ],
             },
             {
@@ -83,7 +83,34 @@ const data = [
         ],
     },
     {
-        label: 'LET',
+        label: 'ATS',
+        children: [
+            {
+                label: '2025',
+                children: [
+                    {
+                        label: '1月',
+                        label: '2月',
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        label: 'ZC',
+        children: [
+            {
+                label: '2025',
+                children: [
+                    {
+                        label: '1月',
+                    },
+                ],
+            },
+        ],
+    },
+    {
+        label: 'CI',
         children: [
             {
                 label: '2025',
@@ -97,6 +124,9 @@ const data = [
         ],
     }
 ]
+const handleSelectionChange = (val) => {
+    multipleSelection.value = val
+}
 onMounted(() => {
 
 })
@@ -129,6 +159,7 @@ onMounted(() => {
         backdrop-filter: blur(vw(6));
         padding: vw(10);
         border-radius: vw(10);
+
         .file-group {
             height: vw(50);
         }
@@ -141,6 +172,8 @@ onMounted(() => {
 
 .file-tree {
     border: none !important;
+    width: 100%;
+    overflow: hidden;
 
     :deep(.el-tree-node__content) {
         height: vw(44);
@@ -148,6 +181,16 @@ onMounted(() => {
 
         .el-text {
             font-size: vw(17) !important;
+        }
+    }
+
+    .custom-tree-node {
+        flex: 1;
+        overflow: hidden;
+        span {
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
         }
     }
 }

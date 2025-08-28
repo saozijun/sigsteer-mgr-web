@@ -44,7 +44,7 @@ a {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  background: url("@/assets/screen/bg.png") no-repeat center center;
+  background: url("@/assets/screen/bg.webp") no-repeat center center;
   background-size: cover;
   @include flex-center;
   position: relative;

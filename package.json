@@ -1,6 +1,7 @@
 {
   "name": "bayt",
   "version": "0.0.0",
+  "description": "业务质量监测系统",
   "private": true,
   "type": "module",
   "engines": {

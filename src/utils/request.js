@@ -5,16 +5,13 @@ import { tansParams, blobValidate } from "@/utils/ruoyi";
 import { saveAs } from "file-saver";
 import { useUserStore } from "../stores/modules/user";
 let downloadLoadingInstance;
-// 是否显示重新登录
-export let isRelogin = { show: false };
 
 axios.defaults.headers["Content-Type"] = "application/json;charset=utf-8";
 // 创建axios实例
 const service = axios.create({
-  // axios中请求配置有baseURL选项，表示请求URL公共部分
   baseURL: import.meta.env.VITE_APP_BASE_API,
   // 超时
-  timeout: 10000,
+  timeout: 600000,
 });
 
 // request拦截器
@@ -108,7 +105,7 @@ service.interceptors.response.use(
       userStore.logout().then(() => {
         location.href = "/";
       });
-    }else if(code == 500) {
+    }else if(code == 500 && response.data.message) {
       message = response.data.message;
     } else if (message == "Network Error") {
       message = "后端接口连接异常";

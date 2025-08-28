@@ -83,7 +83,7 @@
           </div>
         </div>
         <div class="map-box-content">
-          <img src="@/assets/screen/car.png" alt="">
+          <img src="@/assets/screen/car.webp" alt="">
           <div class="fan-shape"></div>
           <div class="trans-info">
             1号列车
@@ -332,6 +332,7 @@ const openCar = (item) => {
     height: 100%;
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     gap: 1.5vh;
   }
 
@@ -500,7 +501,6 @@ const openCar = (item) => {
       width: 100%;
       flex: 1;
       position: relative;
-
       .map-box-title {
         width: 75%;
         height: vw(150);
@@ -521,7 +521,8 @@ const openCar = (item) => {
           width: 100%;
           height: 100%;
           border-radius: 50%;
-          border: vw(4) solid #ffffff25;
+          border: vw(4) solid #24c0e749;
+          z-index: -1;
         }
 
         .title-item {

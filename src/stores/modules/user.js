@@ -24,9 +24,12 @@ export const useUserStore = defineStore(
       userInfo.value = res.data;
     };
     const logout = () => {
-      loginData.value = null;
-      userInfo.value = null;
-      token.value = null;
+      return new Promise((resolve, reject) => {
+        token.value = null;
+        userInfo.value = null;
+        loginData.value = null;
+        resolve();
+      });
     };
     return {
       loginData,

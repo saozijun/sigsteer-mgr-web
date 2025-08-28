@@ -4,11 +4,12 @@
             background-color="#ffffff" text-color="#333333" active-text-color="#000000" unique-opened>
             <el-sub-menu v-for="(item, index) in sidebarRouters" :key="item.name" :index="item.name">
                 <template #title>
-                    <svg-icon :icon-class="item.meta.icon" />
+                    <svg-icon v-if="item.meta.icon" :icon-class="item.meta.icon" />
                     <span style="margin-left: .6vw;">{{ item.title }}</span>
                 </template>
                 <el-menu-item v-for="(child) in item.children" :key="child.name" :index="child.path">
-                    {{ child.title }}
+                    <svg-icon v-if="child.meta.icon" :icon-class="child.meta.icon" />
+                    <span style="margin-left: .6vw;">{{ child.title }}</span>
                 </el-menu-item>
             </el-sub-menu>
         </el-menu>

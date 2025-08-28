@@ -21,7 +21,7 @@ export function del(params) {
 // 详情
 export function getById(id) {
   return request({
-    url: "/v1/user/get_by_id/" + id,
+    url: "/v1/user/" + id,
     method: "get",
   });
 }
@@ -47,8 +47,8 @@ export function update(data) {
 // 改变用户状态
 export function changeStatus(id, enabled) {
   return request({
-    url: "/v1/user/change_status",
+    url: `/v1/user/${id}/changeStatus`,
     method: "post",
-    data: { id, enabled },
+    params: { status: enabled },
   });
 }

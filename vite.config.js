@@ -6,7 +6,6 @@ const baseUrl = "http://192.168.0.142:9191";
 export default defineConfig(({ mode, command }) => {
   const env = loadEnv(mode, process.cwd());
   const { VITE_APP_BASE_API } = env;
-
   
   return {
     plugins: createVitePlugins(env, command === 'build'),

@@ -1,23 +1,22 @@
 <template>
     <div>
-        <el-dialog v-model="dialogVisible" :title="`${form.id ? '编辑' : '新增'}车辆与IP绑定`" width="40%" @close="handleClose">
+        <el-dialog v-model="dialogVisible" :title="`${form.id ? '编辑' : '新增'}业务间隔阈值`" width="40%" @close="handleClose" append-to-body>
             <el-form ref="formRef" :model="form" label-width="80px" style="margin-top: 2vh;" :rules="rules">
-                <el-form-item label="车辆编号" prop="vehicleCode">
-                    <el-input v-model="form.vehicleCode" placeholder="请输入"></el-input>
+               <el-form-item label="业务类型" prop="vehicleCode">
+                    <el-select v-model="form.vehicleCode" placeholder="请选择" popper-class="screen_popper">
+                        <el-option label="LTE-M" value="LTE-M"></el-option>
+                    </el-select>
                 </el-form-item>
-                <el-form-item label="车头IP地址" prop="frontIp">
+                <el-form-item label="阈值" prop="frontIp">
                     <el-input v-model="form.frontIp" placeholder="请输入"></el-input>
                 </el-form-item>
-                <el-form-item label="车尾IP地址" prop="rearIp">
+                <el-form-item label="备注" prop="rearIp">
                     <el-input v-model="form.rearIp" placeholder="请输入"></el-input>
-                </el-form-item>
-                <el-form-item label="IMSI号" prop="imsiId">
-                    <el-input v-model="form.imsiId" placeholder="请输入"></el-input>
                 </el-form-item>
             </el-form>
             <template #footer>
                 <div class="dialog-footer">
-                    <Btn text="取消" @click="dialogVisible = false" color="#949799"/>
+                    <Btn text="取消" @click="dialogVisible = false" type="info"/>
                     <Btn text="保存" @click="submit" />
                 </div>
             </template>
@@ -38,15 +37,13 @@ const form = ref({
     imsiId: '',
 })
 const rules = ref({
-    vehicleCode: [{ required: true, message: '请输入车辆编号', trigger: 'blur' }],
-    frontIp: [{ required: true, message: '请输入车头IP地址', trigger: 'blur' }],
-    rearIp: [{ required: true, message: '请输入车尾IP地址', trigger: 'blur' }],
-    imsiId: [{ required: true, message: '请输入IMSI号', trigger: 'blur' }],
+
 })
 const handleClose = () => { 
     formRef.value.resetFields()
 }
 const submit = async () => { 
+    return
     await formRef.value.validate()
     if (form.value.id) await update(form.value) 
     else await add(form.value)

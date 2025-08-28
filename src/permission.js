@@ -33,7 +33,9 @@ router.beforeEach((to, from, next) => {
         permissionStore.generateRoutes().then(accessRoutes => {
           next({ ...to, replace: true }) // hack方法 确保addRoutes已完成
         }).catch(err => {
-          next()
+          userStore.logout().then(() => {
+            next({ path: '/' })
+          });
         })
       }
     }

@@ -1,4 +1,7 @@
 @use "../screenInit.scss" as *;
+@forward 'element-plus/theme-chalk/src/mixins/config.scss' with (
+  $namespace: 'ep'
+);
 @forward "element-plus/theme-chalk/src/common/var.scss" with (
   $colors: (
     "primary": (
@@ -6,14 +9,15 @@
     ),
   )
 );
+
 :root {
   --el-font-size-base: 0.8vw;
   --el-text-color-regular: #fff;
   --el-border-color: #0000001a;
 }
-:deep(.el-dialog) {
+.el-dialog {
   --el-dialog-margin-top: 15vh;
-  --el-dialog-bg-color: #00000049;
+  --el-dialog-bg-color: #00000049 !important;
   --el-dialog-box-shadow: var(--el-box-shadow);
   --el-dialog-title-font-size: 1vw;
   --el-dialog-content-font-size: 0.9vw;
@@ -54,8 +58,11 @@
     }
   }
 }
-:deep(.el-select__placeholder) {
-  color: #fff !important;
+.el-select__placeholder {
+  color: #ffffff;
+  &.is-transparent {
+    color: #afafaf;
+  }
 }
 .el-select__wrapper {
   background-color: rgba(0, 0, 0, 0.1);

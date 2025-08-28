@@ -22,12 +22,11 @@ const usePermissionStore = defineStore("permission", {
       this.sidebarRouters = routes;
     },
     generateRoutes(roles) {
-      return new Promise((resolve) => {
+      return new Promise((resolve, reject) => {
         getRouters()
           .then((res) => {
             const sdata = JSON.parse(JSON.stringify(res.data));
             const rewriteRoutes = filterAsyncRouter(sdata);
-
             // 将动态路由添加到backend路由下
             rewriteRoutes.forEach((route) => {
               router.addRoute("backend", route);
@@ -37,7 +36,7 @@ const usePermissionStore = defineStore("permission", {
             resolve(rewriteRoutes);
           })
           .catch((err) => {
-            resolve([]);
+            reject(err);
           });
       });
     },

@@ -71,7 +71,7 @@
             </el-form>
             <template #footer>
                 <div class="dialog-footer">
-                    <Btn text="取消" type="info" @click="dialogVisible = false"/>
+                    <Btn text="取消" type="info" @click="dialogVisible = false" />
                     <Btn text="保存" @click="submit" />
                 </div>
             </template>
@@ -87,7 +87,20 @@ const emit = defineEmits(['success'])
 const dialogVisible = ref(false)
 const formRef = ref(null)
 const roleListData = ref([])
-
+const defaultForm = {
+    id: undefined,
+    username: undefined,
+    phone: undefined,
+    nickName: undefined,
+    email: undefined,
+    pass: undefined,
+    checkPass: undefined,
+    deptName: '默认部门',
+    userType: 0,
+    gender: '男',
+    enabled: 0,
+    roles: []
+}
 // 自定义验证规则
 const validatePass = (rule, value, callback) => {
     if (form.value.id) {
@@ -136,18 +149,7 @@ const validatePhone = (rule, value, callback) => {
     }
 }
 
-const form = ref({
-    id: undefined,
-    username: undefined,
-    phone: undefined,
-    nickName: undefined,
-    email: undefined,
-    pass: undefined,
-    checkPass: undefined,
-    gender: '男',
-    enabled: 0,
-    roles: []
-})
+const form = ref({...defaultForm})
 
 const rules = ref({
     username: [
@@ -186,18 +188,7 @@ onMounted(async () => {
 
 const handleClose = () => {
     formRef.value.resetFields()
-    form.value = {
-        id: undefined,
-        username: undefined,
-        phone: undefined,
-        nickName: undefined,
-        email: undefined,
-        pass: undefined,
-        checkPass: undefined,
-        gender: '男',
-        enabled: 0,
-        roles: []
-    }
+    form.value = {...defaultForm}
 }
 
 const submit = async () => {
@@ -222,18 +213,7 @@ const submit = async () => {
 
 const open = async (row = null) => {
     // 重置表单
-    form.value = {
-        id: undefined,
-        username: undefined,
-        phone: undefined,
-        nickName: undefined,
-        email: undefined,
-        pass: undefined,
-        checkPass: undefined,
-        gender: '男',
-        enabled: 0,
-        roles: []
-    }
+    form.value = {...defaultForm}
 
     if (row) {
         // 编辑时获取用户详情

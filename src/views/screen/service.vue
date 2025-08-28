@@ -23,7 +23,7 @@
         <div class="right-title">{{ trainItem.vehicleCode }} → {{ tabList[tabIndex] }}</div>
         <div class="car-to-zc">
           <div class="zc-chart">
-            <dLine></dLine>
+            <dLine ref="vobcLineRef"></dLine>
           </div>
           <div class="zc-list">
             <el-table :data="vobcTableData" height="100%" style="width: 100%;" scrollbar-always-on>
@@ -42,7 +42,7 @@
         <div class="right-title"> {{ tabList[tabIndex] }} ← {{ trainItem.vehicleCode }}</div>
         <div class="car-to-zc">
           <div class="zc-chart">
-            <dLine></dLine>
+            <dLine ref="serviceLineRef"></dLine>
           </div>
           <div class="zc-list">
             <el-table :data="serviceTableData" height="100%" scrollbar-always-on>
@@ -70,6 +70,8 @@ const trainList = ref([])
 const vobcTableData = ref([]);
 const serviceTableData = ref([])
 const tabList = ref(['ZC', 'CI', 'ATS'])
+const vobcLineRef = ref(null)
+const serviceLineRef = ref(null)
 
 const trainId = ref(null)
 const trainItem = computed(() => {
@@ -102,7 +104,8 @@ const initData = async () => {
 
     vobcTableData.value = vobcTimeRes.data ? vobcTimeRes.data : []
     serviceTableData.value = serviceTimeRes.data ? serviceTimeRes.data : []
-    
+    vobcLineRef.value.init(vobcRes.data.timeInterval)
+    serviceLineRef.value.init(serviceRes.data.timeInterval)
     loading.value = false
   } catch (error) {
     loading.value = false

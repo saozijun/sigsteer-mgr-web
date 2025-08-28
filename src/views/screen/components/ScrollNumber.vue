@@ -20,7 +20,7 @@ import { useTransition } from '@vueuse/core'
 const props = defineProps({
     // 目标数值
     value: {
-        type: Number,
+        type: [Number, String],
         default: 0
     },
     // 动画持续时间（毫秒）

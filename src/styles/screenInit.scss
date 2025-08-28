@@ -38,12 +38,6 @@
     box-sizing: border-box;
     line-height: 1;
   }
-
-  .dialog-footer {
-    display: flex;
-    justify-content: center;
-    gap: vw(15);
-  }
   ul,
   li {
     list-style: none;
@@ -52,6 +46,11 @@
 .btn-group {
   display: flex;
   align-items: center;
+  gap: vw(15);
+}
+.dialog-footer {
+  display: flex;
+  justify-content: center;
   gap: vw(15);
 }
 :deep(.tooltip-box) {

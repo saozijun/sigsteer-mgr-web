@@ -12,10 +12,17 @@ import { computeFontSize } from '@/utils'
 
 const option = ref({})
 const baseFontSize = ref(13)
-const data = ref([])
-const init = (initData, redLine = 5) => {
-    const dateList = initData.map((item) => item.name);
-    const valueList = initData.map((item) => item.value);
+const init = (initData = [], redLine = 0.5) => {
+    console.log(initData);
+    let tempData = new Array();
+    for (let i = 0; i <= 50; i++) {
+        tempData.push({
+            name: i,
+            value: initData[i] || 0
+        })
+    }
+    const dateList = tempData.map((item) => item.name);
+    const valueList = tempData.map((item) => item.value);
 
     option.value = {
         title: {
@@ -150,13 +157,7 @@ const init = (initData, redLine = 5) => {
     };
 }
 onMounted(() => {
-    for (let i = 0; i <= 50; i++) {
-        data.value.push({
-            name: i,
-            value: Math.floor(Math.random() * 10)
-        })
-    }
-    init(data.value)
+    init()
     window.addEventListener('resize', init)
 })
 

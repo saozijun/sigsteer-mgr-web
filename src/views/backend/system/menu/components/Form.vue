@@ -18,12 +18,17 @@
                 <el-form-item v-if="form.type.toString() !== '2'" label="菜单图标" prop="icon">
                     <el-popover placement="bottom-start" :width="540" trigger="click" popper-class="screen_popper">
                         <template #reference>
-                            <el-input v-model="form.icon" placeholder="点击选择图标" @blur="showSelectIcon" readonly>
+                            <el-input v-model="form.icon" placeholder="点击选择图标" @blur="showSelectIcon" readonly clearable>
                                 <template #prefix>
                                     <svg-icon v-if="form.icon" :icon-class="form.icon" class="el-input__icon"
                                         style="height: 32px;width: 16px;" />
                                     <el-icon v-else style="height: 32px;width: 16px;">
                                         <search />
+                                    </el-icon>
+                                </template>
+                                <template #suffix>
+                                    <el-icon @click="form.icon = ''"  v-if="form.icon" class="close-icon">
+                                        <CircleClose />
                                     </el-icon>
                                 </template>
                             </el-input>
@@ -95,9 +100,7 @@ const emit = defineEmits(['success'])
 const dialogVisible = ref(false)
 const formRef = ref(null)
 const menus = ref([])
-
-// 表单数据
-const form = ref({
+const defaultForm = {
     id: null,
     title: null,
     name: null,
@@ -105,13 +108,15 @@ const form = ref({
     path: null,
     component: null,
     iframe: false,
-    pid: 0,
+    pid: "0",
     icon: null,
     cache: false,
     hidden: false,
     type: 0,
     permission: null
-})
+}
+// 表单数据
+const form = ref({...defaultForm})
 
 // 验证规则
 const rules = ref({
@@ -137,21 +142,7 @@ const getMenus = async () => {
 
 const handleClose = () => {
     formRef.value.resetFields()
-    form.value = {
-        id: null,
-        title: null,
-        name: null,
-        sort: 1000,
-        path: null,
-        component: null,
-        iframe: false,
-        pid: "0",
-        icon: null,
-        cache: false,
-        hidden: false,
-        type: 0,
-        permission: null
-    }
+    form.value = {...defaultForm}
 }
 
 const submit = async () => {
@@ -169,21 +160,7 @@ const submit = async () => {
 
 const open = async (row = null) => {
     // 重置表单
-    form.value = {
-        id: null,
-        title: null,
-        name: null,
-        sort: 1000,
-        path: null,
-        component: null,
-        iframe: false,
-        pid: "0",
-        icon: null,
-        cache: false,
-        hidden: false,
-        type: 0,
-        permission: null
-    }
+    form.value = {...defaultForm}
     getMenus()
     if (row) {
         // 编辑时获取菜单详情
@@ -194,7 +171,7 @@ const open = async (row = null) => {
 }
 
 /** 选择图标 */
-function selected(name) {
+const selected = (name) => {
   form.value.icon = name
 }
 
@@ -202,3 +179,12 @@ defineExpose({
     open
 })
 </script>
+
+<style lang="scss" scoped>
+.close-icon {
+    cursor: pointer;
+    &:hover {
+        color: #378eff;
+    }
+}
+</style>

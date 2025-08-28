@@ -83,7 +83,7 @@ button {
   border-radius: var(--radius);
   overflow: hidden;
   transition: all 0.3s;
-  line-height: 1.5;
+  line-height: 1;
   cursor: pointer;
   width: fit-content;
   min-width: vw(70);
